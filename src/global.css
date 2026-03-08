@@ -1,0 +1,52 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@layer theme {
+  @theme {
+    --color-primary: #0dccf2;
+    --color-accent: #f20db4;
+    --color-roast: #f97316;
+    --color-background-light: #f5f8f8;
+    --color-background-dark: #081113;
+    --color-glass: rgba(16, 31, 34, 0.6);
+    --color-glass-border: rgba(255, 255, 255, 0.1);
+
+    --font-display: "Space Grotesk", sans-serif;
+  }
+}
+
+@layer utilities {
+  .glassmorphism {
+    background: var(--color-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-glass-border);
+  }
+
+  .iridescent-border {
+    position: relative;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(to right, #081113, #081113) padding-box,
+      linear-gradient(45deg, #0dccf2, #f20db4, #0dccf2) border-box;
+  }
+}
+
+/* Platform-specific font families */
+@media android {
+  :root {
+    --font-mono: monospace;
+    --font-rounded: normal;
+    --font-serif: serif;
+    --font-sans: normal;
+  }
+}
+
+@media ios {
+  :root {
+    --font-mono: ui-monospace;
+    --font-serif: ui-serif;
+    --font-sans: system-ui;
+    --font-rounded: ui-rounded;
+  }
+}

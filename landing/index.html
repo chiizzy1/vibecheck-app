@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VibeCheck — Your AI Director. No Bad Takes.</title>
+    <meta
+      name="description"
+      content="VibeCheck is the AI-powered content coaching app that helps creators nail every take. Real-time feedback, AI coaching, smart captions — all in one app."
+    />
+    <meta
+      name="keywords"
+      content="content creator, AI coaching, video coaching, TikTok, Instagram Reels, YouTube Shorts, teleprompter, caption generator"
+    />
+
+    <!-- OG -->
+    <meta property="og:title" content="VibeCheck — Your AI Director" />
+    <meta
+      property="og:description"
+      content="Real-time body language analysis, AI coaching in your ear, and smart captions that convert. The creator tool you didn't know you needed."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vibecheck.app" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #0a0a0a;
+        --surface: rgba(255, 255, 255, 0.04);
+        --border: rgba(255, 255, 255, 0.08);
+        --primary: #0dccf2;
+        --accent: #f20db4;
+        --text: #ffffff;
+        --text-muted: #888;
+        --font-display: "Space Grotesk", sans-serif;
+        --font-body: "Inter", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- NAV --- */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        backdrop-filter: blur(20px);
+        background: rgba(10, 10, 10, 0.8);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.25rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-style: italic;
+      }
+      .logo span {
+        color: var(--primary);
+      }
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      nav a:hover {
+        color: var(--text);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+      .nav-cta {
+        background: var(--primary);
+        color: var(--bg) !important;
+        padding: 0.5rem 1.25rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .nav-cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 30px rgba(13, 204, 242, 0.3);
+      }
+
+      /* --- HERO --- */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 8rem 2rem 6rem;
+        position: relative;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(13, 204, 242, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary);
+        font-family: var(--font-display);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.8s ease-out;
+      }
+      .badge::before {
+        content: "✨";
+      }
+      h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.1s both;
+      }
+      h1 em {
+        font-style: italic;
+        color: var(--primary);
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        max-width: 540px;
+        margin-bottom: 2.5rem;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+      }
+      .hero-ctas {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: var(--bg);
+        padding: 1rem 2.5rem;
+        border-radius: 1rem;
+        font-weight: 700;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        text-decoration: none;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(13, 204, 242, 0.3);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--text);
+        padding: 1rem 2.5rem;
+        border-radius: 1rem;
+        font-weight: 600;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition: border-color 0.2s;
+        text-decoration: none;
+      }
+      .btn-ghost:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* --- FEATURES --- */
+      .features {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .section-label {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      .section-title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        text-align: center;
+        margin-bottom: 4rem;
+        line-height: 1.2;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+      .feature-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        transition:
+          transform 0.3s,
+          border-color 0.3s;
+      }
+      .feature-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+      }
+      .feature-card h3 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+      .feature-card p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      /* --- PRICING --- */
+      .pricing {
+        padding: 6rem 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .pricing-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      .pricing-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        text-align: center;
+      }
+      .pricing-card.featured {
+        border-color: var(--primary);
+        background: rgba(13, 204, 242, 0.04);
+        position: relative;
+      }
+      .pricing-card.featured::before {
+        content: "MOST POPULAR";
+        position: absolute;
+        top: -0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: var(--bg);
+        padding: 0.25rem 1rem;
+        border-radius: 999px;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+      }
+      .pricing-card .plan-name {
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .pricing-card .price {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 0.25rem;
+      }
+      .pricing-card .period {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+      }
+      .pricing-card ul {
+        list-style: none;
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+      .pricing-card li {
+        padding: 0.4rem 0;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      .pricing-card li::before {
+        content: "✓ ";
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      /* --- CTA --- */
+      .cta-section {
+        padding: 6rem 2rem;
+        text-align: center;
+        position: relative;
+      }
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(242, 13, 180, 0.06) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .cta-section h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        margin-bottom: 1rem;
+      }
+      .cta-section p {
+        color: var(--text-muted);
+        max-width: 480px;
+        margin: 0 auto 2rem;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+      }
+
+      /* --- ANIMATIONS --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 768px) {
+        .nav-links a:not(.nav-cta) {
+          display: none;
+        }
+        .pricing-cards {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding: 6rem 1.5rem 4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">VIBE<span>CHECK</span></div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#cta" class="nav-cta">Get Early Access</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="badge">AI-Powered Content Coaching</div>
+      <h1>Your AI director.<br /><em>No bad takes.</em></h1>
+      <p>
+        Real-time body language analysis, live AI coaching in your ear, and smart captions that convert. The creator tool you
+        didn't know you needed.
+      </p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Join the Waitlist</a>
+        <a href="#features" class="btn-ghost">See Features</a>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything you need to nail every take.</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(13, 204, 242, 0.1)">👁️</div>
+          <h3>Real-Time Metrics</h3>
+          <p>On-device ML tracks your eye contact, energy, posture, and smile. See your performance live while recording.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(242, 13, 180, 0.1)">🎬</div>
+          <h3>AI Live Coaching</h3>
+          <p>Choose a personality — Director, Bestie, or Roast — and get real-time whispered coaching powered by Gemini.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(249, 115, 22, 0.1)">📜</div>
+          <h3>AI Teleprompter</h3>
+          <p>Voice-paced scrolling script overlay. Generate scripts with AI and scroll them at your natural speaking pace.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(34, 197, 94, 0.1)">✍️</div>
+          <h3>Smart Captions</h3>
+          <p>AI generates 3 caption variants optimized for TikTok, Reels, or Shorts. Complete with trending hashtags.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(234, 179, 8, 0.1)">📊</div>
+          <h3>Performance Analytics</h3>
+          <p>Track your improvement over time. See trends in eye contact, energy, and overall performance score.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background: rgba(139, 92, 246, 0.1)">🚀</div>
+          <h3>One-Tap Export</h3>
+          <p>Export your best take with burned-in captions and share directly to TikTok, Instagram, or YouTube.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Start free. Go Pro when you're ready.</h2>
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <div class="plan-name">Free</div>
+          <div class="price">$0</div>
+          <div class="period">forever</div>
+          <ul>
+            <li>5 sessions / month</li>
+            <li>3 takes / session</li>
+            <li>Director mode</li>
+            <li>Basic captions</li>
+            <li>Watermark exports</li>
+          </ul>
+          <a href="#cta" class="btn-ghost" style="display: inline-block; width: 100%; text-align: center">Get Started</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="plan-name">Pro</div>
+          <div class="price">$9</div>
+          <div class="period">/ month</div>
+          <ul>
+            <li>Unlimited sessions</li>
+            <li>Unlimited takes</li>
+            <li>All 3 coaching modes</li>
+            <li>AI live coaching (Gemini)</li>
+            <li>Smart A/B captions</li>
+            <li>Clean HD exports</li>
+            <li>Full analytics dashboard</li>
+          </ul>
+          <a href="#cta" class="btn-primary" style="display: inline-block; width: 100%; text-align: center">Start Free Trial</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="cta">
+      <h2>Ready to level up your content?</h2>
+      <p>Join the waitlist and be the first to know when VibeCheck launches.</p>
+      <form onsubmit="handleSubmit(event)" style="display: flex; gap: 0.75rem; max-width: 440px; margin: 0 auto">
+        <input
+          type="email"
+          placeholder="your@email.com"
+          required
+          style="
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            outline: none;
+          "
+        />
+        <button type="submit" class="btn-primary" style="white-space: nowrap">Join Waitlist</button>
+      </form>
+      <p style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted)">No spam. Just launch updates.</p>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 VibeCheck. Built for creators who refuse to post bad takes.</p>
+    </footer>
+
+    <script>
+      function handleSubmit(e) {
+        e.preventDefault();
+        const email = e.target.querySelector("input").value;
+        e.target.innerHTML =
+          "<p style=\"color:#0dccf2;font-family:Space Grotesk,sans-serif;font-weight:700;font-size:1.1rem;\">🎉 You're on the list! We'll be in touch.</p>";
+        console.log("Waitlist signup:", email);
+      }
+
+      // Intersection Observer for fade-in animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animation = "fadeInUp 0.6s ease-out forwards";
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document.querySelectorAll(".feature-card, .pricing-card").forEach((el) => {
+        el.style.opacity = "0";
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>

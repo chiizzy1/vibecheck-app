@@ -1,0 +1,11 @@
+app/_layout.tsx(2,73): error TS2307: Cannot find module '@expo-google-fonts/space-grotesk' or its corresponding type declarations.
+app/_layout.tsx(4,31): error TS2307: Cannot find module 'expo-splash-screen' or its corresponding type declarations.
+app/index.tsx(3,47): error TS2307: Cannot find module 'lucide-react-native' or its corresponding type declarations.
+app/results.tsx(3,47): error TS2307: Cannot find module 'lucide-react-native' or its corresponding type declarations.
+app/session.tsx(5,55): error TS2307: Cannot find module 'lucide-react-native' or its corresponding type declarations.
+src/tw/image.tsx(28,10): error TS2589: Type instantiation is excessively deep and possibly infinite.
+src/tw/image.tsx(28,10): error TS2590: Expression produces a union type that is too complex to represent.
+src/tw/index.tsx(18,10): error TS2590: Expression produces a union type that is too complex to represent.
+src/tw/index.tsx(52,10): error TS2590: Expression produces a union type that is too complex to represent.
+src/tw/index.tsx(79,10): error TS2589: Type instantiation is excessively deep and possibly infinite.
+src/tw/index.tsx(88,11): error TS2339: Property 'underlayColor' does not exist on type 'ViewStyle'.
